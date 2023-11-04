@@ -54,7 +54,7 @@ const DocSave = ( { navigation } ) => {
             this.handleLogin
             this.props.navigation.navigate('')}}
         >
-          <Text style={styles.buttonText}>Actualizar datos</Text>
+          <Text style={styles.buttonText}>Registrar Doctor</Text>
         </TouchableOpacity>
       
         <TouchableOpacity
