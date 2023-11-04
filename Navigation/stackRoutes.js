@@ -8,6 +8,7 @@ import Doctores from '../Views/Doctores';
 import UpdateDoctores from '../Views/UpdateDoctores';
 import RegistrarDoctores from '../Views/RegistrarDoctores'
 
+// Agregando las rutas 
 export default {
     Home,
     Iniciosesion,

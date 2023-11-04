@@ -13,7 +13,7 @@ const PatientForm = ( { navigation } ) => {
   const [patientInfo, setPatientInfo] = useState('');
 
   const handleSave = () => {
-    // implementar la lógica para guardar los datos del paciente
+    // implementar la lógica para guardar los datos 
   };
 
   return (
