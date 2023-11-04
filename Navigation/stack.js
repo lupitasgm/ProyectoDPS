@@ -58,6 +58,29 @@ function AppStack() {
                     title : 'Registro de pacientes',
                 } }
             />
+
+            <Stack.Screen 
+                name="Doctores" 
+                component={Routes.Doctores} 
+                options={ { 
+                } } 
+            />
+
+            <Stack.Screen 
+                name="UpdateDoctores" 
+                component={Routes.UpdateDoctores} 
+                options={ {  
+                    title : 'Doctores',
+                } } 
+            /> 
+            
+            <Stack.Screen 
+                name="RegistrarDoctores" 
+                component={Routes.RegistrarDoctores} 
+                options={ { 
+                    title : 'Doctores',
+                } }
+            />
             
         </Stack.Navigator>
     </NavigationContainer>
