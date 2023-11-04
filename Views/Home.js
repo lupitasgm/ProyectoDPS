@@ -1,50 +1,55 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, TextInput, Button, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
-const Home = ( ) => {
-  const handleButton1Press = () => {
-    navigation.navigate('Iniciosesion')
-    alert('Botón 1 presionado');
+class Home extends Component{
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      Email: null,
+      Password: null,
+      Phone: null,
+      uri: null,
+    };
+  }
+
+  render ( ) {
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={ () => { {this.navigateToLogin}
+            this.props.navigation.navigate('Pacientes') } }
+        >
+          <Text style={styles.menuItemText}>Pacientes</Text>
+        </TouchableOpacity>
+  
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={ () => { {this.navigateToLogin}
+            this.props.navigation.navigate('Doctores') } }
+        >
+          <Text style={styles.menuItemText}>Doctores</Text>
+        </TouchableOpacity>
+  
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={this.navigateToLogin}
+        >
+          <Text style={styles.menuItemText}>Citas</Text>
+        </TouchableOpacity>
+  
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={this.navigateToLogin}
+        >
+          <Text style={styles.menuItemText}>Agenda</Text>
+        </TouchableOpacity>
+        
+      </View>
+    );
   };
-
-  const handleButton2Press = () => {
-    // Lógica cuando se presiona el Botón 2
-    alert('Botón 2 presionado');
-  };
-
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.menuButton}
-        onPress={this.navigateToLogin}
-      >
-        <Text style={styles.menuItemText}>Pacientes</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.menuButton}
-        onPress={this.navigateToLogin}
-      >
-        <Text style={styles.menuItemText}>Doctores</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.menuButton}
-        onPress={this.navigateToLogin}
-      >
-        <Text style={styles.menuItemText}>Citas</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.menuButton}
-        onPress={this.navigateToLogin}
-      >
-        <Text style={styles.menuItemText}>Agenda</Text>
-      </TouchableOpacity>
-      
-    </View>
-  );
-};
+}
 
 const styles = StyleSheet.create({
   logo: {

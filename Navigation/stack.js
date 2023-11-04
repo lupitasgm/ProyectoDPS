@@ -13,27 +13,71 @@ function AppStack() {
     <NavigationContainer>
         <Stack.Navigator>
 
-        <Stack.Screen 
+            <Stack.Screen 
                 name="Iniciosesion" 
                 component={Routes.Iniciosesion} 
                 options={ { 
                     headerShown: false, 
                 } } 
-            />    
-            
-            <Stack.Screen 
-                name="Registro" 
-                component={Routes.Registro} 
-                options={ { 
-                    headerShown: false,
-                } }
-            />
+            />  
 
             <Stack.Screen 
                 name="Home" 
                 component={Routes.Home} 
                 options={ { 
+                    headerShown: false, } }
+            />
+
+            <Stack.Screen 
+                name="Registro" 
+                component={Routes.Registro} 
+                options={ { 
                     headerShown: false,
+                    } }
+            />  
+            
+            <Stack.Screen 
+                name="Pacientes" 
+                component={Routes.Pacientes} 
+                options={ { 
+                } } 
+            />
+
+            <Stack.Screen 
+                name="UpdatePacientes" 
+                component={Routes.UpdatePacientes} 
+                options={ {  
+                    title : 'Pacientes',
+                } } 
+            /> 
+            
+            <Stack.Screen 
+                name="RegistrarPaciente" 
+                component={Routes.RegistrarPacientes} 
+                options={ { 
+                } }
+            />
+
+            <Stack.Screen 
+                name="Doctores" 
+                component={Routes.Doctores} 
+                options={ { 
+                } } 
+            />
+
+            <Stack.Screen 
+                name="UpdateDoctores" 
+                component={Routes.UpdateDoctores} 
+                options={ {  
+                    title : 'Doctores',
+                } } 
+            /> 
+            
+            <Stack.Screen 
+                name="RegistrarDoctores" 
+                component={Routes.RegistrarDoctores} 
+                options={ { 
+                    title : 'Doctores',
                 } }
             />
             

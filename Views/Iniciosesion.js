@@ -45,11 +45,18 @@ class LoginScreen extends Component {
           style={styles.loginButton}
           onPress={ () => {
             this.handleLogin
-            this.props.navigation.navigate('Home')    
-        }}
+            this.props.navigation.navigate('Home')}}
         >
           <Text style={styles.buttonText}>Iniciar Sesión</Text>
         </TouchableOpacity>
+
+        <Text style={styles.text2}>¿No tienes una cuenta?</Text>
+        <TouchableOpacity onPress={ () => { this.props.navigation.navigate('Registro') } } >
+        <Text style={styles.textlink}>Registrarse</Text>
+        </TouchableOpacity>
+
+
+        
       </View>
     );
   }
@@ -77,6 +84,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#015657',
   },
+  text2: {
+    fontSize: 16,
+    color: '#015657',
+    textAlign: 'center',
+  },
+  textlink: {
+    fontSize: 16,
+    color: '#89C400',
+    textAlign:'center',
+  },
   input: {
     width: '100%',
     height: 40,
@@ -91,6 +108,8 @@ const styles = StyleSheet.create({
     padding: 12, // Espaciado interno del botón
     width: '100%',
     textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 10,
   },
   buttonText: {
     color: 'white', // Color del texto del botón
