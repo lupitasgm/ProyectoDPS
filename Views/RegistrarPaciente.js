@@ -1,57 +1,88 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
+
+// Inicio declaracion Firebase
+import appFirebase from '../credenciales'
+import {getFirestore, collection, addDoc, getDocs, doc, deleteDoc, getDoc, setDoc} from 'firebase/firestore'
+
+const db = getFirestore(appFirebase)
+
+// Fin declaracion Firebase
 
 const Stack = createStackNavigator();
 
 const PatientSave = ( { navigation } ) => {
-  const [NombrePaciente, setNombrePaciente] = useState('');
-  const [ApellidosPaciente, setApellidosPaciente] = useState('');
-  const [FechanPaciente, setFechanPaciente] = useState('');
-  const [NumResponsable, setNumResponsable] = useState('');
-  const [ResponsablePaciente, setResponsablePaciente] = useState('');
 
-  const handleSave = () => {
-    // implementar la lógica para guardar los datos del paciente
-  };
+  const initialState = {
+    nombres:'',
+    apellidos:'',
+    fechaNacimiento:'',
+    numResponsable: '',
+    responsableFamuliar: ''
+}
+
+const [state, setState] = useState(initialState)
+
+const handleChangeText = (value, name)=>{
+    setState({...state, [name]:value})
+}
+
+const savePacient = async()=>{
+    //console.log(state)
+    try{
+        await addDoc(collection(db, 'ProyectoDPS'),{
+            ...state
+        })
+
+        Alert.alert('Alerta', 'Guardado con éxito')
+        //props.navigation.navigate('List');
+
+    }catch(error){
+        console.error(error)
+    }
+}
+
+  // const [NombrePaciente, setNombrePaciente] = useState('');
+  // const [ApellidosPaciente, setApellidosPaciente] = useState('');
+  // const [FechanPaciente, setFechanPaciente] = useState('');
+  // const [NumResponsable, setNumResponsable] = useState('');
+  // const [ResponsablePaciente, setResponsablePaciente] = useState('');
+
+  // const handleSave = () => {
+  //   // implementar la lógica para guardar los datos del paciente
+  // };
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Nombres</Text>
       <TextInput
         style={styles.input}
-        value={NombrePaciente}
-        onChangeText={(text) => setNombrePaciente(text)}
+        onChangeText={(value)=>handleChangeText(value, 'nombres')} value={state.nombres}
       />
       <Text style={styles.text}>Apellidos</Text>
       <TextInput
         style={styles.input}
-        value={ApellidosPaciente}
-        onChangeText={(text) => setApellidosPaciente(text)}
+        onChangeText={(value)=>handleChangeText(value, 'apellidos')} value={state.apellidos}
       />
       <Text style={styles.text}>Fecha de nacimiento</Text>
       <TextInput
         style={styles.input}
-        value={FechanPaciente}
-        onChangeText={(text) => setFechanPaciente(text)}
+        onChangeText={(value)=>handleChangeText(value, 'fechaNacimiento')} value={state.fechaNacimiento}
       />
       <Text style={styles.text}>Núm. Responsable</Text>
       <TextInput
         style={styles.input}
-        value={NumResponsable}
-        onChangeText={(text) => setNumResponsable(text)}
+        onChangeText={(value)=>handleChangeText(value, 'numResponsable')} value={state.numResponsable}
       />
       <Text style={styles.text}>Responsable Familiar:</Text>
       <TextInput
         style={styles.input}
-        value={ResponsablePaciente}
-        onChangeText={(text) => setResponsablePaciente(text)}
+        onChangeText={(value)=>handleChangeText(value, 'responsableFamiliar')} value={state.responsableFamuliar}
       />
         <TouchableOpacity
           style={styles.PButton}
-          onPress={ () => {
-            this.handleLogin
-            this.props.navigation.navigate('Pacientes')}}
+          onPress={savePacient}
         >
           <Text style={styles.buttonText}>Registrar Paciente</Text>
         </TouchableOpacity>
