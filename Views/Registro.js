@@ -8,25 +8,33 @@ class RegisterScreen extends Component {
         nombre: '',
         apellido: '',
         username: '',
-        email: '',
         password: '',
+        password2: '',
     };
+  }
+
+  handleNameChange = (text) => {
+    this.setState({ nombre: text });
+  }
+
+  handleLastNameChange = (text) => {
+    this.setState({ apellido: text });
   }
 
   handleUsernameChange = (text) => {
     this.setState({ username: text });
   }
 
-  handleEmailChange = (text) => {
-    this.setState({ email: text });
-  }
-
   handlePasswordChange = (text) => {
     this.setState({ password: text });
   }
 
+  handlePassword2Change = (text) => {
+    this.setState({ password2: text });
+  }
+
   handleRegister = () => {
-    const { nombre, apellido, username, email, password } = this.state;
+    const { nombre, apellido, username, password, password2 } = this.state;
     // Lógica de registro de usuario
   }
 
@@ -37,13 +45,13 @@ class RegisterScreen extends Component {
         <Text style={styles.text}>Nombre</Text>
         <TextInput
           style={styles.input}
-          onChangeText={this.handleUsernameChange}
+          onChangeText={this.handleNameChange}
           value={this.state.nombre}
         />
         <Text style={styles.text}>Apellido</Text>
         <TextInput
           style={styles.input}
-          onChangeText={this.handleUsernameChange}
+          onChangeText={this.handleLastNameChange}
           value={this.state.apellido}
         />
         <Text style={styles.text}>Nombre de usuario</Text>
@@ -55,15 +63,16 @@ class RegisterScreen extends Component {
         <Text style={styles.text}>Contraseña</Text>
         <TextInput
           style={styles.input}
-          onChangeText={this.handleEmailChange}
-          value={this.state.email}
+          secureTextEntry={true}
+          onChangeText={this.handlePasswordChange}
+          value={this.state.password}
         />
         <Text style={styles.text}>Confirme su contraseña</Text>
         <TextInput
           style={styles.input}
           secureTextEntry={true}
-          onChangeText={this.handlePasswordChange}
-          value={this.state.password}
+          onChangeText={this.handlePassword2Change}
+          value={this.state.password2}
         />
         <TouchableOpacity
           style={styles.loginButton}
@@ -71,6 +80,16 @@ class RegisterScreen extends Component {
         >
           <Text style={styles.buttonText}>Registrarse</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={ () => {
+            this.props.navigation.navigate('Iniciosesion')    
+        }}
+        >
+          <Text style={styles.buttonText}>Regresar</Text>
+        </TouchableOpacity>
+
       </View>
     );
   }
@@ -112,6 +131,16 @@ const styles = StyleSheet.create({
       padding: 12, // Espaciado interno del botón
       width: '100%',
       textAlign: 'center',
+      marginTop: 20,
+      marginBottom: 5,
+    },
+    backButton: {
+      backgroundColor: '#015657', // Color de fondo del botón
+      padding: 12, // Espaciado interno del botón
+      width: '100%',
+      textAlign: 'center',
+      marginTop: 20,
+      marginBottom: 5,
     },
     buttonText: {
       color: 'white', // Color del texto del botón
