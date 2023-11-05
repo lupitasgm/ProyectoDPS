@@ -35,6 +35,7 @@ class RegisterScreen extends Component {
         const user = userCredential.user;
         console.log('Usuario registrado:', user);
         Alert.alert('Usuario creado');
+        this.props.navigation.navigate('Iniciosesion')  
       })
       .catch((error) => {
         // Error durante el registro
@@ -77,6 +78,7 @@ class RegisterScreen extends Component {
         <Text style={styles.text}>Contraseña</Text>
         <TextInput
           style={styles.input}
+          secureTextEntry={true}
           onChangeText={ password => this.setState({password})}
         />
 
