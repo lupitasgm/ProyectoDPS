@@ -57,32 +57,40 @@ const styles = StyleSheet.create({
       paddingLeft: 10,
     },
     loginButton: {
-      backgroundColor: '#89C400', // Color de fondo del botón
-      padding: 12, // Espaciado interno del botón
+      backgroundColor: '#89C400', 
+      padding: 12, 
       width: '100%',
       textAlign: 'center',
       marginTop: 20,
       marginBottom: 10,
     },
+    GButton: {
+      padding: 12, 
+      width: '100%',
+      textAlign: 'center',
+      marginTop: 5,
+      marginBottom: 10,
+      TextColor: '#705C5C',
+    },
     menuButton: {
-      backgroundColor: '#DDE5F1', // Color de fondo del botón
-      padding: 18, // Espaciado interno del botón
+      backgroundColor: '#DDE5F1',
+      padding: 18,
       width: '90%',
       textAlign: 'center',
       margin: 12,
       alignItems: 'center',
     },
     backButton: {
-      backgroundColor: '#015657', // Color de fondo del botón
-      padding: 12, // Espaciado interno del botón
+      backgroundColor: '#015657', 
+      padding: 12, 
       width: '100%',
       textAlign: 'center',
       marginTop: 20,
       marginBottom: 5,
     },
     buttonText: {
-      color: 'white', // Color del texto del botón
-      fontSize: 14, // Tamaño de fuente del texto del botón
+      color: 'white', 
+      fontSize: 14, 
       fontFamily: 'Arial',
       fontWeight: 'bold',
       textAlign: 'center',
