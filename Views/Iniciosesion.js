@@ -4,13 +4,13 @@ import styles from '../Styles/styles';
 
 import appFirebase from '../credenciales'
 import {getFirestore} from 'firebase/firestore'
-import { getAuth, signInWithEmailAndPassword, initializeAuth, auth } from 'firebase/auth';
+import { FirebaseError, initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword, initializeAuth } from 'firebase/auth';
 import { GoogleSignin, GoogleSigninButton, statusCodes  } from '@react-native-google-signin/google-signin';
-
-
-
+import { useEffect } from 'react';
 
 const db = getFirestore(appFirebase)
+const auth = getAuth(appFirebase);
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -46,25 +46,13 @@ class LoginScreen extends Component {
       Alert.alert('Error al iniciar sesión: ' + error.message);
     }
   }
-  
-  onGoogleButtonPress = async () => {
-    
-    const { idToken } = await GoogleSignin.signIn();
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    const firebaseUserCredential = await auth().currentUser.linkWithCredential(googleCredential);
-    return auth().signInWithCredential(googleCredential);
-    this.props.navigation.navigate('Home');
-
-  }
 
   googleLogin = async () => {
     try {
-      GoogleSignin.configure();
       const { idToken } = await GoogleSignin.signIn();
-      const googleCredential = GoogleAuthProvider.credential(idToken);
-      const userCredential = await auth.signInWithCredential(googleCredential);
-      const user = userCredential.user;
-      Alert.alert('Ingreso exitoso con Google');
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      const firebaseUserCredential = await auth().currentUser.linkWithCredential(googleCredential);
+      return auth().signInWithCredential(googleCredential);
       this.props.navigation.navigate('Home');
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -112,7 +100,7 @@ class LoginScreen extends Component {
 
         <GoogleSigninButton
           style={styles.GButton}
-          onPress={() => this.onGoogleButtonPress()} />
+          onPress={() => this.googleLogin()} />
 
         <Text style={styles.text2}>¿No tienes una cuenta?</Text>
         <TouchableOpacity onPress={ () => { this.props.navigation.navigate('Registro') } } >
