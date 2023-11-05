@@ -16,18 +16,16 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.0'
-        classpath("com.android.tools.build:gradle")
-        classpath("com.facebook.react:react-native-gradle-plugin")
-        classpath 'com.google.gms:google-services:4.3.10' // <--- use this version or newer
+        classpath("com.android.tools.build:gradle:7.0.0")  // Actualiza la versión de Gradle
+        classpath("com.facebook.react:react-native-gradle-plugin:X.X.X")  // Actualiza a la versión adecuada de react-native-gradle-plugin
+        classpath ('com.google.gms:google-services:4.3.10')
     }
     allprojects {
-    repositories {
-        google() // <--- make sure this is included
-        maven {
-            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-            url "$rootDir/../node_modules/react-native/android"
-        }
+        repositories {
+            google() // <--- make sure this is included
+            maven {
+                url "$rootDir/../node_modules/react-native/android"
+            }
         }
     }
 }
