@@ -47,7 +47,7 @@ function AppStack() {
                 name="UpdatePacientes" 
                 component={Routes.UpdatePacientes} 
                 options={ {  
-                    title : 'Pacientes',
+                    title : 'UpdatePacientes',
                 } } 
             /> 
             

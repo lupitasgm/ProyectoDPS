@@ -13,7 +13,7 @@ const db = getFirestore(appFirebase)
 
 const Stack = createStackNavigator();
 
-const PatientForm = ( { navigation } ) => {
+const PatientForm = ( { route, navigation } ) => {
 
 
   // const [NombrePaciente, setNombrePaciente] = useState('');
@@ -29,26 +29,26 @@ const PatientForm = ( { navigation } ) => {
 
   const [pacient, setPacient] = useState({})
 
-    const getOnePacient = async(id)=>{
-        try{
-          const docRef = doc(db, 'ProyectoDPS', id)
-          const docSnap = await getDoc(docRef)
-          setPacient(docSnap.data())
-        }
-        catch(error){
-          console.log(error);
-        }
-      }
+  const getOnePacient = async(id)=>{
+    try{
+      const docRef = doc(db, 'ProyectoDPS', id)
+      const docSnap = await getDoc(docRef)
+      setPacient(docSnap.data())
 
-    useEffect(()=>{
-        getOnePacient(this.props.route.params.productoId)
-      },[])
+    }catch(error){
+      console.error(error)
+    }
+  }
 
-    const deletePacient = async(id)=>{ 
-        await deleteDoc(doc(db,'ProyectoDPS', id))
-        Alert.alert('Exito', 'Paciente eliminado con exito')
-        props.navigation.navigate('List')
-     }
+  useEffect(()=>{
+    getOnePacient(route.params.pacientId)
+  },[])
+
+  const deletePacient = async(id)=>{ 
+    await deleteDoc(doc(db,'ProyectoDPS', id))
+    Alert.alert('Exito', 'Paciente eliminado con exito')
+    navigation.navigate('Pacientes')
+  }
 
   return (
     <View style={styles.container}>
@@ -67,7 +67,11 @@ const PatientForm = ( { navigation } ) => {
         >
           <Text style={styles.buttonText}>Actualizar datos</Text>
         </TouchableOpacity>
-      
+
+        <TouchableOpacity style={styles.DeleteButton} onPress={()=>deletePacient(route.params.pacientId)}>
+         <Text style={styles.buttonText2}>Eliminar Paciente</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.backButton}
           onPress={ () => {
@@ -109,6 +113,14 @@ const styles = StyleSheet.create({
     },
     PButton: {
       backgroundColor: '#DDE5F1', // Color de fondo del botón
+      padding: 12, // Espaciado interno del botón
+      width: '100%',
+      textAlign: 'center',
+      marginTop: 20,
+      marginBottom: 5,
+    },
+    DeleteButton: {
+      backgroundColor: '#c00000', // Color de fondo del botón
       padding: 12, // Espaciado interno del botón
       width: '100%',
       textAlign: 'center',

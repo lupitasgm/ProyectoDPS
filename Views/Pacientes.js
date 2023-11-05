@@ -13,9 +13,9 @@ const db = getFirestore(appFirebase)
 
 const Stack = createStackNavigator();
 
-const TableApp = ( { navigation } ) => {
+const TableApp = ( { props, navigation } ) => {
   const [searchText, setSearchText] = useState('');
-  const [data, setData] = useState([]);
+  const [inf, setInf] = useState([]);
 
   // const filteredData = data.filter((item) => {
   //   return (
@@ -43,7 +43,7 @@ const TableApp = ( { navigation } ) => {
   // const [lista, setLista] = useState([])
 
     useEffect(()=>{
-        const getLista = async()=>{
+        const getInf = async()=>{
             try {
                 const querySnapshot = await getDocs(collection(db, 'ProyectoDPS'))
                 const docs = []
@@ -58,13 +58,13 @@ const TableApp = ( { navigation } ) => {
                         responsableFamuliar
                     })
                 })
-                setData(docs);
+                setInf(docs);
             } catch (error) {
                 console.log(error);
             }
         }
-        getLista()
-    }, [data])
+        getInf()
+    }, [inf])
 
   // Seccion visual
   return (
@@ -78,9 +78,9 @@ const TableApp = ( { navigation } ) => {
       <View style={styles.row}>
         <View style={styles.headerCell}>
           <Text>Nombre</Text>
-          {data.map((list)=>(
-            <TouchableOpacity key={list.id} style={styles.BotonLista} 
-            onPress={()=>navigation.navigate('UpdatePacientes',{productoId:list.id})}>
+          {inf.map((list)=>(
+            <TouchableOpacity key={list.id} style={styles.PButton} 
+            onPress={()=>navigation.navigate('UpdatePacientes',{pacientId:list.id})}>
               <Text style={styles.TextoNombre}>-{list.nombres}</Text>
             </TouchableOpacity>
             ))
