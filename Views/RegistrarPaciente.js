@@ -35,7 +35,7 @@ const savePacient = async()=>{
         await addDoc(collection(db, 'ProyectoDPS'),{
             ...state
         })
-
+        //
         Alert.alert('Datos guardados', 'Registro de paciente completado')
         navigation.navigate('Pacientes')
 
