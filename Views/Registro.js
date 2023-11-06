@@ -1,46 +1,59 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
+import styles from '../Styles/styles';
+
+import appFirebase from '../credenciales'
+import {getFirestore} from 'firebase/firestore'
+import { initializeApp } from 'firebase/app';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { useEffect } from 'react';
+
+const db = getFirestore(appFirebase)
+const auth = getAuth(appFirebase);
 
 class RegisterScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        nombre: '',
-        apellido: '',
-        username: '',
-        password: '',
-        password2: '',
+        nombre: null,
+        apellido: null,
+        email: null,
+        password: null,
+        password2: null,
     };
   }
 
-  handleNameChange = (text) => {
-    this.setState({ nombre: text });
-  }
-
-  handleLastNameChange = (text) => {
-    this.setState({ apellido: text });
-  }
-
-  handleUsernameChange = (text) => {
-    this.setState({ username: text });
-  }
-
-  handlePasswordChange = (text) => {
-    this.setState({ password: text });
-  }
-
-  handlePassword2Change = (text) => {
-    this.setState({ password2: text });
-  }
-
-  handleRegister = () => {
-    const { nombre, apellido, username, password, password2 } = this.state;
-    // Lógica de registro de usuario
+  singUpUser = (email, password)=>{
+    if (password.length < 6) {
+      Alert.alert('La contraseña debe tener al menos 6 caracteres');
+      return;
+    }
+  
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Usuario registrado exitosamente
+        const user = userCredential.user;
+        console.log('Usuario registrado:', user);
+        Alert.alert('Usuario creado');
+        this.props.navigation.navigate('Iniciosesion')  
+      })
+      .catch((error) => {
+        // Error durante el registro
+        console.error('Error al registrar:', error);
+        Alert.alert('Error al registrar: ' + error.message);
+      });
   }
 
   render() {
     return (
       <View style={styles.container}>
+        
+        <View style={styles.containerimgr}>
+          <Image
+          source={require('./img/logo.png')}
+          style={styles.logor} />
+        </View>
+          
         <Text style={styles.title}>Registro de Usuario</Text>
         <Text style={styles.text}>Nombre</Text>
         <TextInput
@@ -48,25 +61,27 @@ class RegisterScreen extends Component {
           onChangeText={this.handleNameChange}
           value={this.state.nombre}
         />
+
         <Text style={styles.text}>Apellido</Text>
         <TextInput
           style={styles.input}
           onChangeText={this.handleLastNameChange}
           value={this.state.apellido}
         />
-        <Text style={styles.text}>Nombre de usuario</Text>
+
+        <Text style={styles.text}>Correo</Text>
         <TextInput
           style={styles.input}
-          onChangeText={this.handleUsernameChange}
-          value={this.state.username}
+          onChangeText={ email => this.setState({email})}
         />
+
         <Text style={styles.text}>Contraseña</Text>
         <TextInput
           style={styles.input}
           secureTextEntry={true}
-          onChangeText={this.handlePasswordChange}
-          value={this.state.password}
+          onChangeText={ password => this.setState({password})}
         />
+
         <Text style={styles.text}>Confirme su contraseña</Text>
         <TextInput
           style={styles.input}
@@ -74,9 +89,10 @@ class RegisterScreen extends Component {
           onChangeText={this.handlePassword2Change}
           value={this.state.password2}
         />
+
         <TouchableOpacity
           style={styles.loginButton}
-          onPress={this.handleRegister}
+          onPress={() => this.singUpUser(this.state.email, this.state.password)}
         >
           <Text style={styles.buttonText}>Registrarse</Text>
         </TouchableOpacity>
@@ -84,7 +100,7 @@ class RegisterScreen extends Component {
         <TouchableOpacity
           style={styles.backButton}
           onPress={ () => {
-            this.props.navigation.navigate('Iniciosesion')    
+            this.props.navigation.navigate('Iniciosesion')   
         }}
         >
           <Text style={styles.buttonText}>Regresar</Text>
@@ -95,60 +111,4 @@ class RegisterScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-    logo: {
-      height: '30%',
-      width: 128,
-    },
-    container: {
-      flex: 1,
-      backgroundColor: 'white',
-      minWidth: '60%',
-      padding: 30,
-    },
-    title: {
-      textAlign: 'center',
-      fontSize: 24,
-      marginBottom: 20,
-      color: '#015657',
-      fontWeight: 'bold',
-    },
-    text: {
-      fontSize: 16,
-      color: '#015657',
-    },
-    input: {
-      width: '100%',
-      height: 40,
-      borderColor: '#D1C6C6',
-      backgroundColor:'#D1C6C6',
-      borderWidth: 1,
-      marginBottom: 10,
-      paddingLeft: 10,
-    },
-    loginButton: {
-      backgroundColor: '#89C400', // Color de fondo del botón
-      padding: 12, // Espaciado interno del botón
-      width: '100%',
-      textAlign: 'center',
-      marginTop: 20,
-      marginBottom: 5,
-    },
-    backButton: {
-      backgroundColor: '#015657', // Color de fondo del botón
-      padding: 12, // Espaciado interno del botón
-      width: '100%',
-      textAlign: 'center',
-      marginTop: 20,
-      marginBottom: 5,
-    },
-    buttonText: {
-      color: 'white', // Color del texto del botón
-      fontSize: 14, // Tamaño de fuente del texto del botón
-      fontFamily: 'Arial',
-      fontWeight: 'bold',
-      textAlign: 'center',
-    },
-  });
-  
 export default RegisterScreen;
