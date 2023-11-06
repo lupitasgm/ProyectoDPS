@@ -39,7 +39,8 @@ function AppStack() {
             <Stack.Screen 
                 name="Pacientes" 
                 component={Routes.Pacientes} 
-                options={ { 
+                options={ {
+                    headerShown: false,
                 } } 
             />
 
@@ -56,6 +57,7 @@ function AppStack() {
                 name="RegistrarPaciente" 
                 component={Routes.RegistrarPacientes} 
                 options={ { 
+                    headerShown: false,
                 } }
             />
 
