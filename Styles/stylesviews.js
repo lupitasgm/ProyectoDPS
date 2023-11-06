@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         width: '80%',
         borderWidth: 1,
         padding: 8,
-        marginBottom: 10,
+        marginBottom: 0,
         borderColor: '#DDE5F1',
         color: '#DDE5F1',
     },
@@ -62,17 +62,17 @@ const styles = StyleSheet.create({
     },
 
     PVButton: {
-        backgroundColor: '#DDE5F1', // Color de fondo del botón
-        padding: 12, // Espaciado interno del botón
+        backgroundColor: '#DDE5F1', 
+        padding: 12, 
         width: '80%',
         textAlign: 'center',
         marginTop: 20,
-        marginBottom: 5,
+        marginBottom: 20,
     },
 
     PButton: {
-        backgroundColor: '#DDE5F1', // Color de fondo del botón
-        padding: 12, // Espaciado interno del botón
+        backgroundColor: '#DDE5F1', 
+        padding: 12,
         width: '100%',
         textAlign: 'center',
         marginTop: 20,
@@ -80,36 +80,77 @@ const styles = StyleSheet.create({
     },
 
     buttonText: {
-        color: '#015657', // Color del texto del botón
-        fontSize: 14, // Tamaño de fuente del texto del botón
+        color: '#015657', 
+        fontSize: 14, 
         fontFamily: 'Arial',
         textAlign: 'center',
     },
     
     buttonText2: {
-        color: 'white', // Color del texto del botón
-        fontSize: 14, // Tamaño de fuente del texto del botón
+        color: 'white', 
+        fontSize: 14, 
         fontFamily: 'Arial',
         textAlign: 'center',
     },
 
     backButton: {
-        backgroundColor: '#015657', // Color de fondo del botón
-        padding: 12, // Espaciado interno del botón
+        backgroundColor: '#015657',
+        padding: 12, 
         width: '80%',
         textAlign: 'center',
-        marginTop: 20,
+        marginTop: 5,
         marginBottom: 5,
     },
 
     backButton2: {
-        backgroundColor: '#015657', // Color de fondo del botón
-        padding: 12, // Espaciado interno del botón
+        backgroundColor: '#015657', 
+        padding: 12, 
+        width: '100%',
+        textAlign: 'center',
+        marginTop: 5,
+        marginBottom: 5,
+    },
+
+    DeleteButton: {
+        backgroundColor: '#E64538',
+        padding: 12, 
         width: '100%',
         textAlign: 'center',
         marginTop: 20,
         marginBottom: 5,
-    },
+      },
+
+      textview: {
+        backgroundColor: '#EBE5E5', 
+        padding: 12, 
+        width: '100%',
+        marginTop: 20,
+        marginBottom: 5,
+      },
+
+      BotonLista: {
+        padding: 8,
+        backgroundColor: '#f0f0f0',
+        margin: 5,
+      },
+
+      TextoNombre: {
+        fontSize: 16,
+        color: '#333',
+      },
+
+      text: {
+        fontSize: 16,
+        color: '#015657',
+      },
+
+      title: {
+        textAlign: 'center',
+        fontSize: 16,
+        marginBottom: 20,
+        color: '#015657',
+        fontWeight: 'bold',
+      },
     
 });
 export default styles;

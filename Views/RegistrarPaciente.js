@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import styles from '../Styles/stylesviews';
 
@@ -20,7 +20,7 @@ const PatientSave = ( { navigation } ) => {
     apellidos:'',
     fechaNacimiento:'',
     numResponsable: '',
-    responsableFamuliar: ''
+    responsableFamiliar: ''
 }
 
 const [state, setState] = useState(initialState)
@@ -36,24 +36,13 @@ const savePacient = async()=>{
             ...state
         })
 
-        Alert.alert('Alerta', 'Guardado con éxito')
-        //props.navigation.navigate('List');
+        Alert.alert('Datos guardados', 'Registro de paciente completado')
+        navigation.navigate('Pacientes')
 
     }catch(error){
         console.error(error)
     }
 }
-
-  // const [NombrePaciente, setNombrePaciente] = useState('');
-  // const [ApellidosPaciente, setApellidosPaciente] = useState('');
-  // const [FechanPaciente, setFechanPaciente] = useState('');
-  // const [NumResponsable, setNumResponsable] = useState('');
-  // const [ResponsablePaciente, setResponsablePaciente] = useState('');
-
-  // const handleSave = () => {
-  //   // implementar la lógica para guardar los datos del paciente
-  // };
-
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Nombres</Text>
@@ -79,7 +68,7 @@ const savePacient = async()=>{
       <Text style={styles.text}>Responsable Familiar:</Text>
       <TextInput
         style={styles.input}
-        onChangeText={(value)=>handleChangeText(value, 'responsableFamiliar')} value={state.responsableFamuliar}
+        onChangeText={(value)=>handleChangeText(value, 'responsableFamiliar')} value={state.responsableFamiliar}
       />
         <TouchableOpacity
           style={styles.PButton}
