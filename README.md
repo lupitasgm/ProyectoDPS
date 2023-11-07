@@ -91,6 +91,13 @@ Mock ups
 
 *https://www.canva.com/design/DAFvZZaZ7ng/C8ZWki7O6IHRA-kTfeGuQg/watch?utm_content=DAFvZZaZ7ng&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink*
 
+Manual Tecnico 
+
+*https://drive.google.com/file/d/19CH_xQ9L2h629QtMsuhpMBMdpvBZYHGp/view?usp=drive_link*
+
+Manual de usuario 
+
+**
 
 # Autores 
 Adriana Guadalupe Martínez Soto  - Programación, diseño, lógica y manuales 
