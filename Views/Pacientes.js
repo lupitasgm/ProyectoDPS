@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import styles from '../Styles/stylesviews';
 
@@ -32,30 +32,30 @@ const TableApp = ( { props, navigation } ) => {
     const newData = data.filter((item) => item.id !== id);
     setData(newData);
   };
-
-    useEffect(()=>{
-        const getInf = async()=>{
-            try {
-                const querySnapshot = await getDocs(collection(db, 'ProyectoDPS'))
-                const docs = []
-                querySnapshot.forEach((doc)=>{
-                    const {nombres, apellidos, fechaNacimiento, numResponsable, responsableFamuliar} = doc.data()
-                    docs.push({
-                        id:doc.id,
-                        nombres,
-                        apellidos,
-                        fechaNacimiento,
-                        numResponsable,
-                        responsableFamuliar
-                    })
-                })
-                setInf(docs);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        getInf()
-    }, [inf])
+  
+  useEffect(()=>{
+    const getInf = async()=>{
+      try {
+        const querySnapshot = await getDocs(collection(db, 'ProyectoDPS'))
+        const docs = []
+        querySnapshot.forEach((doc)=>{
+          const {nombres, apellidos, fechaNacimiento, numResponsable, responsableFamiliar} = doc.data()
+          docs.push({
+            id:doc.id,
+            nombres,
+            apellidos,
+            fechaNacimiento,
+            numResponsable,
+            responsableFamiliar
+          })
+        })
+        setInf(docs);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getInf()
+  }, [inf])
 
     const handleSearch = () => {
       const filtered = inf.filter((item) =>
@@ -86,12 +86,13 @@ const TableApp = ( { props, navigation } ) => {
           {inf.map((list)=>(
             <TouchableOpacity key={list.id} style={styles.BotonLista} 
             onPress={()=>navigation.navigate('UpdatePacientes',{pacientId:list.id})}>
-              <Text style={styles.TextoNombre}>{list.nombres}</Text>
+              <Text style={styles.TextoNombre}>-{list.nombres}</Text>
             </TouchableOpacity>
             ))
             }
         </View>
       </View>
+
         <TouchableOpacity
           style={styles.PVButton}
           onPress={ () => {

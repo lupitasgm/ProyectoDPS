@@ -42,7 +42,8 @@ const savePacient = async()=>{
     }catch(error){
         console.error(error)
     }
-}
+  }
+  
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Nombres</Text>
@@ -70,6 +71,7 @@ const savePacient = async()=>{
         style={styles.input}
         onChangeText={(value)=>handleChangeText(value, 'responsableFamiliar')} value={state.responsableFamiliar}
       />
+
         <TouchableOpacity
           style={styles.PButton}
           onPress={savePacient}

@@ -1,21 +1,23 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import styles from '../Styles/stylesviews';
+
+// Inicio declaracion Firebase
+import appFirebase from '../credenciales'
+import {getFirestore, collection, addDoc, getDocs, doc, deleteDoc, getDoc, setDoc} from 'firebase/firestore'
+import { useEffect } from 'react';
+
+const db = getFirestore(appFirebase)
+
+// Fin declaracion Firebase
 
 const Stack = createStackNavigator();
 
 const DocView = ( { navigation } ) => {
   const [searchText, setSearchText] = useState('');
-  const [data, setData] = useState([]);
-
-  const filteredData = data.filter((item) => {
-    return (
-      item.columna1.toLowerCase().includes(searchText.toLowerCase()) ||
-      item.columna2.toLowerCase().includes(searchText.toLowerCase()) ||
-      item.columna3.toLowerCase().includes(searchText.toLowerCase())
-    );
-  });
+  const [inf, setInf] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
 
   const addData = () => {
     const newData = {
@@ -31,6 +33,38 @@ const DocView = ( { navigation } ) => {
     setData(newData);
   };
 
+  useEffect(()=>{
+    const getInf = async()=>{
+      try {
+        const querySnapshot = await getDocs(collection(db, 'Doctores'))
+        const docs = []
+        querySnapshot.forEach((doc)=>{
+          const {nombres, apellidos, especialidad, numtelefono, email} = doc.data()
+          docs.push({
+            id:doc.id,
+            nombres,
+            apellidos,
+            especialidad,
+            numtelefono,
+            email
+          })
+        })
+        setInf(docs);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getInf()
+  }, [inf])
+
+  const handleSearch = () => {
+    const filtered = inf.filter((item) =>
+      item.nombres.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredData(filtered);
+  };
+
+   // Seccion visual
   return (
     <View style={styles.containerP}>
       <TextInput
@@ -39,31 +73,26 @@ const DocView = ( { navigation } ) => {
         value={searchText}
         onChangeText={(text) => setSearchText(text)}
       />
+      <TouchableOpacity
+          style={styles.PVButton}
+          onPress={ () => {
+            onPress={handleSearch}}} >
+          <Text style={styles.buttonText}> Buscar </Text>
+      </TouchableOpacity>
+
       <View style={styles.row}>
         <View style={styles.headerCell}>
-          <Text>Nombre</Text>
-        </View>
-        <View style={styles.headerCell}>
-          <Text>ID</Text>
-        </View>
-        <View style={styles.headerCell}>
-          <Text>Actualizar</Text>
+          <Text style={styles.title}>Doctores </Text>
+          {inf.map((list)=>(
+            <TouchableOpacity key={list.id} style={styles.BotonLista} 
+            onPress={()=>navigation.navigate('UpdateDoctores',{docId:list.id})}>
+              <Text style={styles.TextoNombre}>-{list.nombres}</Text>
+            </TouchableOpacity>
+            ))
+            }
         </View>
       </View>
-      {filteredData.map((item) => (
-        <View key={item.id} style={styles.row}>
-          <View style={styles.cell}>
-            <Text>{item.columna1}</Text>
-          </View>
-          <View style={styles.cell}>
-            <Text>{item.columna2}</Text>
-          </View>
-          <View style={styles.cell}>
-            <Button title="X" onPress={() => removeData(item.id)} />
-            <Button title="Editar" onPress={() => removeData(item.id)} />
-          </View>
-        </View>
-      ))}
+
         <TouchableOpacity
           style={styles.PVButton}
           onPress={ () => {
@@ -81,7 +110,6 @@ const DocView = ( { navigation } ) => {
         >
           <Text style={styles.buttonText2}>Regresar</Text>
         </TouchableOpacity>
-
     </View>
   );
 };

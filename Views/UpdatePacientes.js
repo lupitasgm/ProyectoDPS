@@ -16,17 +16,6 @@ const Stack = createStackNavigator();
 
 const PatientForm = ( { route, navigation } ) => {
 
-  // const [NombrePaciente, setNombrePaciente] = useState('');
-  // const [ApellidosPaciente, setApellidosPaciente] = useState('');
-  // const [EdadPaciente, setEdadPaciente] = useState('');
-  // const [NumResponsable, setNumResponsable] = useState('');
-  // const [ResponsablePaciente, setResponsablePaciente] = useState('');
-  // const [patientInfo, setPatientInfo] = useState('');
-
-  //const handleSave = () => {
-    // implementar la lógica para guardar los datos 
-  // };
-
   const [pacient, setPacient] = useState({})
 
   const getOnePacient = async(id)=>{

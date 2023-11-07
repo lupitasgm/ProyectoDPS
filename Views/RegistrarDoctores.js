@@ -1,59 +1,80 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import styles from '../Styles/stylesviews';
+
+// Inicio declaracion Firebase
+import appFirebase from '../credenciales'
+import {getFirestore, collection, addDoc, getDocs, doc, deleteDoc, getDoc, setDoc} from 'firebase/firestore'
+
+const db = getFirestore(appFirebase)
+
+// Fin declaracion Firebase
 
 const Stack = createStackNavigator();
 
 const DocSave = ( { navigation } ) => {
-  const [NombreDoctor, setNombreDoctor] = useState('');
-  const [ApellidosDoctor, setApellidosDoctor] = useState('');
-  const [Especialidad, setEspecialidad] = useState('');
-  const [NumDoctor, setNumDoctor] = useState('');
-  const [CorreoDoctor, setCorreoDoctor] = useState('');
 
-  const handleSave = () => {
-    // implementar la lógica para guardar los datos del paciente
-  };
+  const initialState = {
+    nombres:'',
+    apellidos:'',
+    especialidad:'',
+    numtelefono: '',
+    email: ''
+  }
+  
+  const [state, setState] = useState(initialState)
+  
+  const handleChangeText = (value, name)=>{
+    setState({...state, [name]:value})
+  }
+
+  const saveDoc = async()=>{
+    //console.log(state)
+    try{
+        await addDoc(collection(db, 'Doctores'),{
+            ...state
+        })
+        
+        Alert.alert('Datos guardados', 'Registro de doctor completado')
+        navigation.navigate('Doctores')
+
+    }catch(error){
+        console.error(error)
+    }
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Nombres</Text>
       <TextInput
         style={styles.input}
-        value={NombreDoctor}
-        onChangeText={(text) => setNombreDoctor(text)}
+        onChangeText={(value)=>handleChangeText(value, 'nombres')} value={state.nombres}
       />
       <Text style={styles.text}>Apellidos</Text>
       <TextInput
         style={styles.input}
-        value={ApellidosDoctor}
-        onChangeText={(text) => setApellidosDoctor(text)}
+        onChangeText={(value)=>handleChangeText(value, 'apellidos')} value={state.apellidos}
       />
       <Text style={styles.text}>Especialidad</Text>
       <TextInput
         style={styles.input}
-        value={Especialidad}
-        onChangeText={(text) => setEspecialidad(text)}
+        onChangeText={(value)=>handleChangeText(value, 'especialidad')} value={state.especialidad}
       />
       <Text style={styles.text}>Núm. Teléfonico</Text>
       <TextInput
         style={styles.input}
-        value={NumDoctor}
-        onChangeText={(text) => setNumDoctor(text)}
+        onChangeText={(value)=>handleChangeText(value, 'numtelefono')} value={state.numtelefono}
       />
       <Text style={styles.text}>Correo Electrónico</Text>
       <TextInput
         style={styles.input}
-        value={CorreoDoctor}
-        onChangeText={(text) => setCorreoDoctor(text)}
+        onChangeText={(value)=>handleChangeText(value, 'email')} value={state.email}
       />
 
         <TouchableOpacity
           style={styles.PButton}
-          onPress={ () => {
-            this.handleLogin
-            this.props.navigation.navigate('')}}
+          onPress={saveDoc}
         >
           <Text style={styles.buttonText}>Registrar Doctor</Text>
         </TouchableOpacity>
