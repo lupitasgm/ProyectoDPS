@@ -6,7 +6,9 @@ import UpdatePacientes from '../Views/UpdatePacientes';
 import RegistrarPacientes from '../Views/RegistrarPaciente'
 import Doctores from '../Views/Doctores';
 import UpdateDoctores from '../Views/UpdateDoctores';
-import RegistrarDoctores from '../Views/RegistrarDoctores'
+import RegistrarDoctores from '../Views/RegistrarDoctores';
+import Agendarcita from '../Views/Agendarcita';
+import Agenda from '../Views/Agenda'
 
 // Agregando las rutas 
 export default {
@@ -19,4 +21,6 @@ export default {
     Doctores,
     UpdateDoctores,
     RegistrarDoctores,
+    Agendarcita,
+    Agenda
 }

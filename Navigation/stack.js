@@ -83,6 +83,22 @@ function AppStack() {
                     title : 'Doctores',
                 } }
             />
+
+            <Stack.Screen 
+                name="Agendarcita" 
+                component={Routes.Agendarcita} 
+                options={ { 
+                    title : 'Citas',
+                } } 
+            />
+
+            <Stack.Screen 
+                name="Agenda" 
+                component={Routes.Agenda} 
+                options={ { 
+                    title : 'Agenda',
+                } } 
+            />
             
         </Stack.Navigator>
     </NavigationContainer>

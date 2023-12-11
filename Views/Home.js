@@ -40,14 +40,16 @@ class Home extends Component{
   
         <TouchableOpacity
           style={styles.menuButton}
-          onPress={this.navigateToLogin}
+          onPress={ () => { {this.navigateToLogin}
+            this.props.navigation.navigate('Agendarcita') } }
         >
           <Text style={styles.menuItemText}>Citas</Text>
         </TouchableOpacity>
   
         <TouchableOpacity
           style={styles.menuButton}
-          onPress={this.navigateToLogin}
+          onPress={ () => { {this.navigateToLogin}
+            this.props.navigation.navigate('Agenda') } }
         >
           <Text style={styles.menuItemText}>Agenda</Text>
         </TouchableOpacity>

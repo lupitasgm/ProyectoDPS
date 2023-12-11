@@ -43,7 +43,7 @@ class LoginScreen extends Component {
       Alert.alert('Ingreso exitoso');
       this.props.navigation.navigate('Home');
     } catch (error) {
-      Alert.alert('Error al iniciar sesión: ' + error.message);
+      Alert.alert('Error al iniciar sesión: ' + error.toString());
     }
   }
 
