@@ -99,6 +99,9 @@ Manual de usuario
 
 *[https://drive.google.com/file/d/1kFR45XEjYnlK7nkukn5YZJIgyP5hCMlt/view?usp=drive_link](https://drive.google.com/file/d/1ScS2cBvds_0OlRt9thMUmLpS12QBDqac/view?usp=sharing)*
 
+Enlace a video
+*https://clipchamp.com/watch/LkFvAjiE8wb*
+
 # Autores 
 Adriana Guadalupe Martínez Soto  - Programación, diseño, lógica y manuales 
 
